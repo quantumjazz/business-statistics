@@ -6,4 +6,4 @@ https://quantumjazz.github.io/business-statistics/координатна-сис�
 
 https://quantumjazz.github.io/business-statistics/данни/three#/title-slide
 
-https://quantumjazz.github.io/business-statistics/визуализация/four#/title-slide
+https://quantumjazz.github.io/business-statistics/визуализация/slides#/title-slide
