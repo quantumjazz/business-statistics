@@ -1,0 +1,592 @@
+---
+title: "Визуализиране на данни"
+format:
+  revealjs:
+    incremental: true   
+editor: visual
+---
+
+## Квартетът на Anscombe
+
+Квартетът на Anscombe се състои от четири набора от данни, които имат почти идентични статистически характеристики, но изглеждат много различни, когато са представени на графика. 
+
+
+## Квартетът на Anscombe {.scrollable .smaller}
+
+Какво разбираме от долната таблица?
+
+|         | x1  | y1   | x2 | y2  | x3  | y3   | x4 | y4   |
+|---------|-----|------|----|-----|-----|------|----|------|
+| 1       | 10.0| 8.04 | 10 | 9.14| 10  | 7.46 | 8  | 6.58 |
+| 2       | 8.0 | 6.95 | 8  | 8.14| 8   | 6.77 | 8  | 5.76 |
+| 3       | 13.0| 7.58 | 13 | 8.74| 13  | 12.74| 8  | 7.71 |
+| 4       | 9.0 | 8.81 | 9  | 8.77| 9   | 7.11 | 8  | 8.84 |
+| 5       | 11.0| 8.33 | 11 | 9.26| 11  | 7.81 | 8  | 8.47 |
+| 6       | 14.0| 9.96 | 14 | 8.10| 14  | 8.84 | 8  | 7.04 |
+| 7       | 6.0 | 7.24 | 6  | 6.13| 6   | 6.08 | 8  | 5.25 |
+| 8       | 4.0 | 4.26 | 4  | 3.10| 4   | 5.39 | 19 | 12.50|
+| 9       | 12.0| 10.84| 12 | 9.13| 12  | 8.15 | 8  | 5.56 |
+| 10      | 7.0 | 4.82 | 7  | 7.26| 7   | 6.42 | 8  | 7.91 |
+| 11      | 5.0 | 5.68 | 5  | 4.74| 5   | 5.73 | 8  | 6.89 |
+
+## Квартетът на Anscombe {.smaller}
+
+Може да се покаже, че данните имат еднакви статистически характеристики
+
+| Dataset | N  | Mean of X | Mean of Y | Equation of the Regression Line | Standard Error | t-statistics | Correlation |
+|---------|----|-----------|-----------|---------------------------------|----------------|--------------|-------------|
+| 1       | 11 | 9.0       | 7.501     | y = 3.00x + 0.50                | 0.118          | 4.241        | 0.816       |
+| 2       | 11 | 9.0       | 7.501     | y = 3.00x + 0.50                | 0.118          | 4.239        | 0.816       |
+| 3       | 11 | 9.0       | 7.5       | y = 3.00x + 0.50                | 0.118          | 4.239        | 0.816       |
+| 4       | 11 | 9.0       | 7.501     | y = 3.00x + 0.50                | 0.118          | 4.243        | 0.817       |
+
+## Квартетът на Anscombe 
+
+Когато направим графики на данните, картината е съвсем различна:
+
+```{r}
+library(ggplot2)
+
+# Data Preparation
+df1 <- data.frame(x = c(10, 8, 13, 9, 11, 14, 6, 4, 12, 7, 5),
+                  y = c(8.04, 6.95, 7.58, 8.81, 8.33, 9.96, 7.24, 4.26, 10.84, 4.82, 5.68),
+                  dataset = 'I')
+df2 <- data.frame(x = c(10, 8, 13, 9, 11, 14, 6, 4, 12, 7, 5),
+                  y = c(9.14, 8.14, 8.74, 8.77, 9.26, 8.10, 6.13, 3.10, 9.13, 7.26, 4.74),
+                  dataset = 'II')
+df3 <- data.frame(x = c(10, 8, 13, 9, 11, 14, 6, 4, 12, 7, 5),
+                  y = c(7.46, 6.77, 12.74, 7.11, 7.81, 8.84, 6.08, 5.39, 8.15, 6.42, 5.73),
+                  dataset = 'III')
+df4 <- data.frame(x = c(8, 8, 8, 8, 8, 8, 8, 19, 8, 8, 8),
+                  y = c(6.58, 5.76, 7.71, 8.84, 8.47, 7.04, 5.25, 12.50, 5.56, 7.91, 6.89),
+                  dataset = 'IV')
+
+# Combining the datasets
+anscombe <- rbind(df1, df2, df3, df4)
+
+# Plotting
+ggplot(anscombe, aes(x = x, y = y)) +
+  geom_point() + 
+  facet_wrap(~ dataset, scales = "free") +
+  geom_smooth(method = "lm", se = FALSE, color = "black", linewidth = 0.4) +
+  theme_minimal() +
+  theme(panel.background = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.ticks = element_line(color = "black"),
+        axis.line = element_line(color = "black")) 
+```
+
+
+## Но графиките не са всичко {.scrollable .smaller}
+
+Ако моделът ви е лош, графиката също:
+
+![](1pdf.png)
+
+
+# Примери
+
+## Картата на John Snow за смъртността от холера:
+
+![](2pdf.png)
+
+## Карта на изборите в САЩ
+
+```{r}
+library(plotly)
+library(dplyr)
+library(maps)
+
+# map data
+county_df <- map_data("county")
+state_df <- map_data("state")
+
+county_df$subregion <- gsub(" ", "", county_df$subregion)
+
+#election data
+df <- read.csv("https://raw.githubusercontent.com/bcdunbar/datasets/master/votes.csv")
+df <- subset(df, select = c(Obama, Romney, area_name))
+
+df$area_name <- tolower(df$area_name) 
+df$area_name <- gsub(" county", "", df$area_name)
+df$area_name <- gsub(" ", "", df$area_name)
+df$area_name <- gsub("[.]", "", df$area_name)
+
+df$Obama <- df$Obama*100
+df$Romney <- df$Romney*100
+
+for (i in 1:length(df[,1])) {
+  if (df$Obama[i] > df$Romney[i]) {
+    df$Percent[i] = df$Obama[i]
+  } else {
+    df$Percent[i] = -df$Romney[i]
+  }
+}
+
+names(df) <- c("Obama", "Romney", "subregion", "Percent")
+
+# join data
+US <- inner_join(county_df, df, by = "subregion")
+US <- US[!duplicated(US$order), ]
+
+# colorramp
+blue <- colorRampPalette(c("navy","royalblue","lightskyblue"))(200)                      
+red <- colorRampPalette(c("mistyrose", "red2","darkred"))(200)
+
+#plot
+  ggplot(US, aes(long, lat, group = group)) +
+  geom_polygon(aes(fill = Percent),
+               colour = alpha("white", 1/2), size = 0.05)  +
+  geom_polygon(data = state_df, colour = "white", fill = NA) +
+  ggtitle("2012 US Election") +
+  scale_fill_gradientn(colours=c(blue,"white", red))  +
+  theme_void()
+
+```
+
+## Времеви редове:
+
+```{r}
+library(ggplot2)
+
+# Simulate a random walk series
+set.seed(123) # for reproducibility
+n <- 100 # Number of steps
+walk <- cumsum(rnorm(n)) # Random walk model
+
+# Create a data frame for ggplot
+data <- data.frame(Time = 1:n, Value = walk)
+
+# Time series plot with ggplot
+ggplot(data, aes(x = Time, y = Value)) +
+  geom_line() + # Draw the line
+  theme_minimal(base_size = 16) +
+  theme(panel.background = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.ticks = element_line(color = "black"),
+        axis.line = element_line(color = "black")) +
+  labs(title = "Random Walk", x = "t", y = "")
+```
+
+# Графиките като обекти с функция и като изкуство
+
+## Картата на Флорънс Найтингейл
+
+![](3pdf.png)
+
+## И съвременното й представяне:
+
+![](4pdf.png)
+## Връзка между време и пространство
+
+![](5pdf.png)
+
+## Връзка между време и пространство {.scrollable}
+
+![](6pdf.png)
+
+[Линк към картата](https://upload.wikimedia.org/wikipedia/commons/2/29/Minard.png)
+
+
+# Графиките и изкуство
+
+## Josef Albers
+
+![](7.png)
+
+## Josef Albers
+
+![](8.jpg)
+
+## GGplot
+
+
+```{r}
+set.seed(345)
+library(ggplot2)
+library(RColorBrewer)
+ngroup=30
+names=paste("G_",seq(1,ngroup),sep="")
+DAT=data.frame()
+
+for(i in seq(1:30)){
+    data=data.frame( matrix(0, ngroup , 3))
+    data[,1]=i
+    data[,2]=sample(names, nrow(data))
+    data[,3]=prop.table(sample( c(rep(0,100),c(1:ngroup)) ,nrow(data)))
+    DAT=rbind(DAT,data)
+    }
+colnames(DAT)=c("Year","Group","Value")
+DAT=DAT[order( DAT$Year, DAT$Group) , ]
+
+
+coul = brewer.pal(12, "Paired") 
+coul = colorRampPalette(coul)(ngroup)
+coul=coul[sample(c(1:length(coul)) , size=length(coul) ) ]
+
+ggplot(DAT, aes(x=Year, y=Value, fill=Group )) + 
+    geom_area(alpha=1  )+
+    theme_bw() +
+    #scale_fill_brewer(colour="red", breaks=rev(levels(DAT$Group)))+
+    scale_fill_manual(values = coul)+
+     theme(
+        text = element_blank(),
+        line = element_blank(),
+        title = element_blank(),
+        legend.position="none",
+        panel.border = element_blank(),
+        panel.background = element_blank())
+```
+
+## GGplot
+
+```{r}
+library(aRtsy)
+set.seed(1)
+canvas_swirls(colors = colorPalette("tuscany1"))
+
+```
+
+
+## GGplot
+
+```{r}
+library(aRtsy)
+set.seed(1)
+canvas_mesh(color = "#000000")
+
+```
+
+## GGplot
+
+```{r}
+library(aRtsy)
+set.seed(1)
+canvas_segments(colors = colorPalette("dark1"))
+
+```
+
+
+# Принципи на добрата визуализация
+
+## Добри и лоши примери
+
+Винаги следваме добрите примери и избягваме лошите практики. Учим се от грешките на другите.
+
+[Линк към junkcharts](https://junkcharts.typepad.com/junk_charts/junk-charts-trifecta-checkup-the-definitive-guide.html)
+
+
+## По-малко е повече
+
+![](9.gif)
+
+## Познавайте аудиторията си
+
+- Различни аудитории ще имат различен поглед върху посланието ви.
+- Важно е да идентифицирате, колкото е възможно по-рано в процеса на проектиране, аудиторията и посланието, което трябва да предаде визуалното изображение.
+
+## Идентифицирайте посланието си
+
+- Една фигура има за цел да изрази идея или да демонстрира факти, или резултат, който би бил  дълъг за обяснение  думи. 
+- Важно да се определи ясно ролята на фигурата, т.е. какво е основното послание и как една фигура може най-добре да изрази това послание.
+
+## Адаптирайте фигурата към поддържащата среда
+
+- Една фигура може да бъде показана на различни медии, като плакат, компютърен монитор, прожекционен екран (презентация) или обикновен лист хартия. 
+- Всяка от тези медии представлява различни физически размери за фигурата и всяка предполага различни начини за гледане и взаимодействие с фигурата.
+
+## Използвайте текст
+
+- Не можете да обясните всичко в самата фигура - фигурата трябва да бъде придружена от текст, маркери и други визуални помощници, предназначени за аудиторията.
+
+## Не се доверявайте на настройките по подразбиране
+
+- Всеки софтуер има настройки по подразбиране. Тъй като тези настройки трябва да се използват за практически всеки тип диаграма, те не са фино настроени за конкретен тип диаграма. 
+- С други думи, те са достатъчно добри за общ случай, но не са най-добри за нито един конкретен.
+
+## Използвайте цветовете ефективно
+
+- Цветът е важен елемент от човешките възприятия и е също толкова важен в дизайна на научна фигура. 
+- Както казва Edward Tufte, цветът може да бъде или най-големият ви съюзник, или най-големият ви враг, ако не се използва правилно.
+
+## Не подвеждайте аудиторията
+
+- Това, което отличава една фигура от графични произведения на изкуството, е наличието на данни, които трябва да бъдат показани възможно най-обективно. 
+- Една фигура по дефиниция е свързана с данните (било то експериментални, резултат на модел или резултати) и ако отслабите тази връзка, може неволно да предадете различно от предвиденото послание.
+
+## Избягвайте графичен боклук (Chartjunk)
+
+- Той се отнася до всички ненужни или объркващи визуални елементи в една фигура, които не подобряват съобщението (в най-добрия случай) или го объркват и изкривяват.
+- Използвайте толкова "мастило" за фигурите, колкото е абсолютно необходимо.
+
+## Посланието има предимство пред красотата
+
+- Всяка  област има свой собствен набор от най-добри практики. Важно е да знаете тези стандарти, защото те улесняват по-директното комуникиране,  сравнение между модели, проучвания или експерименти. 
+- Не се увличайте по естетиката на визуализацията, а следвайте добрите практики.
+
+## Използвайте подходящите инструменти
+
+- Съществуват много инструменти, които могат да улеснят живота ви, когато създавате фигури, и познаването на някои от тях може да ви спести много време. 
+- В зависимост от вида на визуалното изображение, обикновено има специален инструмент, който ще направи това, което се опитвате да постигнете. 
+
+
+# Таблици и графики
+
+## Принципи
+
+- Всяка таблица има не повече от две дименсии.
+- Графиките са подходящи, когато динамиката на данните е по-важна.
+- Таблиците са подходящи, когато конкретни променливи са по-важни.
+
+## Лоша таблица {.scrollable .smaller}
+
+| год. | Мъже шофьори       | Общо мъже     | Жени учители| 
+|------|--------------------|---------------|-------------|
+| 2011 | 50.75              | 48.99         | 45.10       | 
+| 2012 | 52.30              | 49.20         | 46.55       | 
+| 2013 | 53.10              | 50.33         | 47.60       |
+| 2014 | 55.45              | 51.25         | 48.90       |
+| 2015 | 57.20              | 52.80         | 50.30       | 
+|      | Жени шофьори       | Мъже учители  | Общо жени   |
+| 2011 | 46.55              | 49.80         | 48.25       |
+| 2012 | 47.80              | 50.10         | 49.40       |
+| 2013 | 48.65              | 51.30         | 50.00       |
+| 2014 | 49.75              | 52.55         | 51.10       |
+| 2015 | 51.40              | 54.20         | 52.60       |
+
+## По-добра таблица {.scrollable .smaller}
+
+| год. | Общо мъже | Общо жени | Мъже шофьори | Жени шофьори   | Мъже учители    | Жени учители      |
+|------|----------|------------|--------------|----------------|-----------------|-------------------|
+| 2011 | 59.5     | 54.7       | 58.9         | 54.1           | 55.1            | 60.7              |
+| 2012 | 61.3     | 56.4       | 60.9         | 55.8           | 56.7            | 62.0              |
+| 2013 | 63.1     | 57.8       | 62.4         | 57.2           | 58.6            | 63.8              |
+| 2014 | 65.4     | 59.3       | 64.8         | 58.8           | 60.2            | 65.8              |
+| 2015 | 67.1     | 60.9       | 66.6         | 60.7           | 61.7            | 67.3              |
+
+## Сложни и добри таблици
+
+![](10.webp)
+
+[Източник](https://www.economist.com/economic-and-financial-indicators/2023/06/22/economic-data-commodities-and-markets)
+
+
+## Анатомия на една фигура
+
+
+```{r}
+library(ggplot2)
+library(ggrepel) # For better text repulsion
+
+# Sample data for line and scatter plot
+set.seed(42)
+x <- seq(0.1, 4, length.out = 30)
+y_line <- exp(-x)
+y_scatter <- rnorm(30, mean = y_line, sd = 0.1)
+
+data <- data.frame(x = x, y_line = y_line, y_scatter = y_scatter, type = rep("Line", 30))
+data_scatter <- data.frame(x = x, y = y_scatter, type = rep("Scatter", 30))
+
+# Plot
+ggplot(data, aes(x = x, y = y_line, color = type)) +
+  geom_line() + # Line plot layer
+  geom_point(data = data_scatter, aes(x = x, y = y, color = type)) + # Scatter plot layer
+  scale_color_manual(values = c("Line" = "blue", "Scatter" = "red"), 
+                     labels = c("Непрекъсната графика на модела", "Наблюдения")) +
+  theme_minimal() + # Minimal theme
+  theme(legend.position = "bottom", # Position the legend at the bottom
+        panel.background = element_blank(), # Blank background
+        panel.grid.major = element_line(color = "grey80", linetype = "dotted"), # Major gridlines
+        panel.grid.minor = element_blank(), # No minor gridlines
+        axis.text.x = element_text(face = "bold", color = "black"), # X axis labels
+        axis.text.y = element_text(face = "bold", color = "black"), # Y axis labels
+        axis.line = element_line(color = "black")) + # Black axis lines
+  labs(x = "X ос", y = "Y ос", title = "Име на фигурата: Анатомия на фигура", color = "Легенда") + # Labels
+  annotate("text", x = 3, y = 2, label = "маркери", color = "blue", size = 5, hjust = 0) +
+  annotate("text", x = 1, y = 1, label = "хоризонтални/вертикални маркери", color = "black", size = 5, hjust = 0) +
+  geom_text_repel(data = data.frame(x = c(3), y = c(0)), 
+                  aes(x = x, y = y), label = "наблюдения", color = "red", 
+                  size = 5, arrow = arrow(length = unit(0.02, "npc")))
+
+
+```
+
+
+# Видове графики
+
+## Хистограма { .smaller}
+
+
+```{r}
+library(ggplot2)
+
+# Generate sample data
+set.seed(42)
+sample_data <- rnorm(1000, mean = 50, sd = 10)
+
+# Create a histogram
+ggplot(data.frame(Value = sample_data), aes(x = Value)) +
+  geom_histogram(binwidth = 5, fill = "grey", color = "black") +
+  theme_minimal() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "black")) +
+  labs(title = "", x = "Стойност", y = "Честота")
+```
+
+Хистограмата по-горе показва разпределението на данни. Полезно е за визуализиране на формата на разпределението на данните, като нормалност или коефициент на асиметрия. 
+
+## Диаграма на разсейване (Scatter Plot) { .smaller}
+
+```{r}
+library(ggplot2)
+
+# Generate sample data
+set.seed(42)
+x <- rnorm(100, 50, 10)
+y <- x * 2 + rnorm(100, 0, 10)
+
+# Create a scatter plot
+ggplot(data.frame(X = x, Y = y), aes(x = X, y = Y)) +
+  geom_point(color = "darkblue", size = 2) +
+  theme_minimal() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "black")) +
+  labs(title = "", x = "Променлива X", y = "Променлива Y")
+```
+
+Диаграмата на разсейване визуализира връзката между две променливи. Всяка точка представлява наблюдение. Графиката може да открои взаимовръзки, тенденции и нетипични наблюдения.
+
+## Диаграма "Кутия" (Box Plot) { .smaller}
+
+```{r}
+library(ggplot2)
+
+# Generate sample data
+set.seed(42)
+group <- rep(c('A', 'B', 'C'), each = 40)
+values <- c(rnorm(40, 20, 5), rnorm(40, 25, 5), rnorm(40, 22, 5))
+data <- data.frame(Group = group, Value = values)
+
+# Create a boxplot
+ggplot(data, aes(x = Group, y = Value, fill = Group)) +
+  geom_boxplot() +
+  theme_minimal() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "black")) +
+  labs(title = "Три извадки", x = "Група", y = "Стойност")
+```
+
+
+"Кутията" визуализира мярката за разположение (която ще наречем "медиана"), мярката за разсейване и дава представа за симетричността и разпределението на данните.
+
+## Линейна диаграма { .smaller}
+
+```{r}
+library(ggplot2)
+
+# Generate sample time series data
+set.seed(42)
+time <- seq(as.Date("2021-01-01"), by = "month", length.out = 24)
+value <- cumsum(rnorm(24, 5, 2))
+
+data <- data.frame(Time = time, Value = value)
+
+# Create a line plot
+ggplot(data, aes(x = Time, y = Value)) +
+  geom_line(color = "blue", size = 1) +
+  geom_point(color = "red", size = 2) + # Optional: add points
+  theme_minimal() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "black")) +
+  labs(title = "", x = "Време", y = "Стойност")
+```
+
+Всяка точка от линията представлява наблюдение на определна дата, а сегментите от линията свързват тези точки, за да покажат тенденцията.
+
+
+## Стълбова диаграма { .smaller}
+
+```{r}
+library(ggplot2)
+
+# Generate sample categorical data
+set.seed(42)
+category <- c('A', 'B', 'C', 'D')
+values <- c(25, 30, 20, 35)
+
+data <- data.frame(Category = category, Value = values)
+
+# Create a bar chart
+ggplot(data, aes(x = Category, y = Value, fill = Category)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  theme_minimal() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "black")) +
+  labs(title = "Bar Chart of Categories", x = "Категория", y = "Данни")
+```
+
+Стълбовата диаграма визуализира стойностите на отделни категории от данните. Височината на всеки стълб отразява стойността или броя на тази категория. 
+
+## Кръгова диаграма { .smaller}
+
+
+```{r}
+library(ggplot2)
+
+# Generate sample categorical data
+set.seed(42)
+category <- c('A', 'B', 'C', 'D')
+values <- c(25, 35, 30, 10)
+data <- data.frame(Category = category, Value = values)
+
+# Create a pie chart
+ggplot(data, aes(x = "", y = Value, fill = Category)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  theme_void() +  # Removes background, grid lines, and text labels.
+  theme(axis.line = element_blank()) +
+  labs(title = "") +
+  scale_fill_manual(values = c("#0073C2FF", "#EFC000FF", "#868686FF", "#CD534CFF")) # Custom colors
+```
+
+Кръговата диаграма показва пропорционалните размери на категориите, като всяка част от кръга съответства на съотношението на категорията към цялото. Този тип визуализация може да е полезна когато имате ограничен брой категории, които не изискват точно сравнение.
+
+## Диаграма на площта (Area Chart) { .smaller}
+
+
+```{r}
+library(ggplot2)
+
+# Generate sample time series data
+set.seed(42)
+time <- seq(as.Date("2021-01-01"), by = "month", length.out = 24)
+value <- cumsum(rnorm(24, 20, 5))
+
+data <- data.frame(Time = time, Value = value)
+
+# Create an area chart
+ggplot(data, aes(x = Time, y = Value)) +
+  geom_area(fill = "lightblue", alpha = 0.5) +
+  geom_line(color = "blue", size = 1) +
+  theme_minimal() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "black")) +
+  labs(title = "", x = "Време", y = "Кумулатовна стойност")
+```
+
+Диаграмата на площта визуализира кумулативната стойност на данните във времето. Тя може да е полезна за открояване на основните фактори, въздействащи върху промяната на данните във времето.
+
