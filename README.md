@@ -13,3 +13,5 @@ https://quantumjazz.github.io/business-statistics/мерки-за-тенденц
 https://quantumjazz.github.io/business-statistics/стандартни-стойности-и-нормално-разпределение/slides#/title-slide
 
 https://quantumjazz.github.io/business-statistics/корелация/slides#/title-slide
+
+https://quantumjazz.github.io/business-statistics/проверка-на-хипотези/slides#/title-slide
