@@ -15,3 +15,5 @@ https://quantumjazz.github.io/business-statistics/стандартни-стой�
 https://quantumjazz.github.io/business-statistics/корелация/slides#/title-slide
 
 https://quantumjazz.github.io/business-statistics/проверка-на-хипотези/slides#/title-slide
+
+https://quantumjazz.github.io/business-statistics/линейна-регресия/slides#/title-slide
