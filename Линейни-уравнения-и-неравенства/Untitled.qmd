@@ -2,7 +2,9 @@
 title: "Тема 1: Линейни уравнения и неравенства"
 format:
   revealjs:
-    incremental: true   
+    incremental: true
+    smaller: true
+    scrollable: true
 editor: visual
 ---
 
