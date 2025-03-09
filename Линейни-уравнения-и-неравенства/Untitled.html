@@ -8,7 +8,7 @@
 <link href="Untitled_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="Untitled_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Untitled_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.5.57">
 
   <title>Тема 1: Линейни уравнения и неравенства</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -155,7 +155,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -242,6 +243,7 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
+      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -334,7 +336,7 @@
 <h2>Линейни уравнения</h2>
 <p>Линейните уравнения и техните решения са фундаментални в алгебрата, като полагат основите за разбиране на връзки между променливи величини. Разбирането на тези връзки е нашата основна задача.</p>
 </section>
-<section id="теорема-1-свойства-на-равенствата" class="slide level2">
+<section id="теорема-1-свойства-на-равенствата" class="slide level2 scrollable">
 <h2>Теорема 1: Свойства на равенствата</h2>
 <p>Ще получим еквивалентно уравнение, ако:</p>
 <ol type="1">
@@ -396,7 +398,7 @@
 <h2>Линейни неравенства</h2>
 <p>Разбирането на неравенствата е от съществено значение за решаването на проблеми, които изискват променливите в тях да бъдат изразени като интервали, а не като конкретни стойности.</p>
 </section>
-<section class="slide level2">
+<section class="slide level2 scrollable">
 
 <h3 id="теорема-2-свойства-на-неравенството">Теорема 2: Свойства на неравенството</h3>
 <p>За да решаваме линейни неравенства и да запазим посоката на неравенството или да го обърнете при определени операции, следваме тези правила:</p>
@@ -417,7 +419,7 @@
 <li class="fragment"><p>Неравенството <span class="math inline">\(x \geq -5\)</span> е еквивалентно на интервалния запис <span class="math inline">\([-5, \infty)\)</span>.</p></li>
 </ul>
 </section>
-<section class="slide level2">
+<section class="slide level2 scrollable">
 
 <h3 id="пример-5-решаване-на-линейно-неравенство">Пример 5: Решаване на линейно неравенство</h3>
 <p><strong>Решете:</strong> <span class="math inline">\(2(2x + 3) \leq 6(x - 2) + 10\)</span></p>
@@ -427,10 +429,10 @@
 <ol type="1">
 <li class="fragment"><strong>Разпределяме и опростяваме:</strong> <span class="math inline">\(4x + 6 \leq 6x - 12 + 10\)</span></li>
 <li class="fragment"><strong>Комбинираме:</strong> <span class="math inline">\(4x + 6 \leq 6x - 2\)</span></li>
-<li class="fragment"><strong>Изолираме променливата <span class="math inline">\(x\)</span>:</strong> <span class="math inline">\(-2x \leq -8 \Rightarrow x \geq 4\)</span></li>
+<li class="fragment"><strong>Изолираме променливата</strong> <span class="math inline">\(x\)</span>: <span class="math inline">\(-2x \leq -8 \Rightarrow x \geq 4\)</span></li>
 </ol>
 </section>
-<section class="slide level2">
+<section class="slide level2 scrollable">
 
 <h3 id="пример-6-решаване-на-двойно-неравенство">Пример 6: Решаване на двойно неравенство</h3>
 <p><strong>Решете:</strong> <span class="math inline">\(-3 \leq 2x + 3 &lt; 9\)</span></p>
@@ -438,13 +440,13 @@
 <li class="fragment"><strong>Стъпки на решение:</strong></li>
 </ul>
 <ol type="1">
-<li class="fragment"><strong>Изолираме <span class="math inline">\(x\)</span> в средата:</strong> Изваждаме <span class="math inline">\(3\)</span> от всички части: <span class="math inline">\(-6 \leq 2x &lt; 6\)</span></li>
-<li class="fragment"><strong>Разделяме всички части на <span class="math inline">\(2\)</span>:</strong> <span class="math inline">\(-3 \leq x &lt; 3\)</span></li>
+<li class="fragment"><strong>Изолираме</strong> <span class="math inline">\(x\)</span> в средата: Изваждаме <span class="math inline">\(3\)</span> от всички части: <span class="math inline">\(-6 \leq 2x &lt; 6\)</span></li>
+<li class="fragment"><strong>Разделяме всички части на</strong> <span class="math inline">\(2\)</span>: <span class="math inline">\(-3 \leq x &lt; 3\)</span></li>
 </ol>
 </section>
 <section class="slide level2">
 
-<table>
+<table class="caption-top">
 <thead>
 <tr class="header">
 <th>Дефиниране</th>
@@ -541,7 +543,7 @@
 <h2>Приложения</h2>
 <p>Използването на уравнения и неравенства за решаване на проблеми от реалния свят има централна роля за превръщането на ежедневните ситуации в математически модели.</p>
 </section>
-<section id="процедура-за-решаване-на-текстови-задачи" class="slide level2">
+<section id="процедура-за-решаване-на-текстови-задачи" class="slide level2 scrollable">
 <h2>Процедура за решаване на текстови задачи</h2>
 <ol type="1">
 <li class="fragment"><strong>Прочетете проблема внимателно:</strong> Въведете променлива, която да представи неизвестното количество.</li>
@@ -556,7 +558,7 @@
 <h3 id="пример-7-определяне-на-покупната-цена">Пример 7: Определяне на покупната цена</h3>
 <p><strong>Въпрос:</strong> Джон купува компютър онлайн за $851,26, включително $57 такса за доставка и 5,2% данък върху продажбите. Каква е покупната цена на компютъра?</p>
 </section>
-<section class="slide level2">
+<section class="slide level2 scrollable">
 
 <h4 id="решение-5">Решение</h4>
 <ol type="1">
@@ -582,7 +584,7 @@
 <h3 id="пример-8-анализ-на-приходиразходи">Пример 8: Анализ на приходи/разходи</h3>
 <p><strong>Въпрос:</strong> Фиксираните разходи на една компания за производство на DVD са $48 000, с променливи разходи от $12,40 на DVD. DVD дисковете се продават за $17,40 всяко. Колко диска трябва да бъдат продадени, за да се изравнят приходите и разходите?</p>
 </section>
-<section class="slide level2">
+<section class="slide level2 scrollable">
 
 <h4 id="решение-6">Решение</h4>
 <ol type="1">
@@ -594,7 +596,7 @@
 <li class="fragment">Приходи на DVD: <span class="math inline">\(17,40\)</span>x$</li>
 </ul></li>
 <li class="fragment"><strong>Уравнение:</strong> <span class="math inline">\(17,40x = 48000 + 12,40x\)</span></li>
-<li class="fragment"><strong>Решаваме за <span class="math inline">\(x\)</span>:</strong>
+<li class="fragment"><strong>Решаваме за</strong> <span class="math inline">\(x\)</span>:
 <ul>
 <li class="fragment">Опростяваме: <span class="math inline">\(5x = 48000\)</span></li>
 <li class="fragment">Решение: <span class="math inline">\(x = 9600\)</span></li>
@@ -609,7 +611,7 @@
 </section>
 <section id="таблица-2-индекс-на-потребителските-цени-1982-1984100" class="slide level2">
 <h2>Таблица 2: Индекс на потребителските цени (1982-1984=100)</h2>
-<table>
+<table class="caption-top">
 <thead>
 <tr class="header">
 <th>Година</th>
@@ -636,7 +638,7 @@
 </tbody>
 </table>
 </section>
-<section class="slide level2">
+<section class="slide level2 scrollable">
 
 <h4 id="решение-7">Решение</h4>
 <ol type="1">
@@ -648,7 +650,7 @@
 <li class="fragment">Заплата от 1960 г.: $13 000</li>
 </ul></li>
 <li class="fragment"><strong>Формула на съотношението:</strong> <span class="math inline">\(\frac{x}{13000} = \frac{195.3}{29.6}\)</span></li>
-<li class="fragment"><strong>Решеаваме за <span class="math inline">\(x\)</span>:</strong>
+<li class="fragment"><strong>Решеаваме за</strong> <span class="math inline">\(x\)</span>:
 <ul>
 <li class="fragment">Изчисляваме: <span class="math inline">\(x = 13000. \frac{195.3}{29.6}\)</span></li>
 <li class="fragment">Резултат: <span class="math inline">\(x = 85774\)</span></li>
@@ -664,7 +666,7 @@
 <h3 id="задача-4-изчисляване-на-данъка-върху-продажбите-и-общите-разходи">Задача 4: Изчисляване на данъка върху продажбите и общите разходи</h3>
 <p><strong>Проблем:</strong> Алиса купува библиотека онлайн за $120, включително такса за доставка от $20. Ставката на данък върху продажбите е 7,5%. Каква е общата цена на библиотеката, включително таксата за доставка и данък върху продажбите?</p>
 </section>
-<section class="slide level2">
+<section class="slide level2 scrollable">
 
 <h4 id="решение-8">Решение</h4>
 <ol type="1">
@@ -675,7 +677,7 @@
 <li class="fragment">Данък върху продажбите: 7,5% от цената на библиотеката <span class="math inline">\(0,075\)</span> умножено по <span class="math inline">\(120\)</span></li>
 </ul></li>
 <li class="fragment"><strong>Уравнение:</strong> <span class="math inline">\(120 + 20 + 0,075\)</span> умножено по <span class="math inline">\(120 = y\)</span></li>
-<li class="fragment"><strong>Решаваме за <span class="math inline">\(y\)</span>:</strong>
+<li class="fragment"><strong>Решаваме за</strong> <span class="math inline">\(y\)</span>:
 <ul>
 <li class="fragment">Изчислете данъка върху продажбите: <span class="math inline">\(0,075\)</span> умножено по 120 = 9$</li>
 <li class="fragment">Обобщаване: <span class="math inline">\(120 + 20 + 9 = 149\)</span></li>
@@ -689,7 +691,7 @@
 <h3 id="задача-5-намиране-на-броя-артикули-за-продажба-с-цел-печалба">Задача 5: Намиране на броя артикули за продажба с цел печалба</h3>
 <p><strong>Въпрос:</strong> Бутик купува шапки за $15 всяка и ги продава за $25 всяка. Бутикът има фиксирани разходи от $200 на ден. Колко шапки трябва да бъдат продадени на ден, за да спечелите печалба от $300?</p>
 </section>
-<section class="slide level2">
+<section class="slide level2 scrollable">
 
 <h4 id="решение-9">Решение</h4>
 <ol type="1">
@@ -701,7 +703,7 @@
 <li class="fragment">Желана печалба: $300</li>
 </ul></li>
 <li class="fragment"><strong>Уравнение на печалбата:</strong> <span class="math inline">\(10z - 200 = 300\)</span></li>
-<li class="fragment"><strong>Решаваме за <span class="math inline">\(z\)</span>:</strong>
+<li class="fragment"><strong>Решаваме за</strong> <span class="math inline">\(z\)</span>:
 <ul>
 <li class="fragment">Опростяваме: <span class="math inline">\(10z = 500\)</span></li>
 <li class="fragment">Решение: z = 50$</li>
@@ -714,7 +716,7 @@
 <h3 id="задача-6-изчисляване-на-почасово-възнаграждение-от-годишна-заплата">Задача 6: Изчисляване на почасово възнаграждение от годишна заплата</h3>
 <p><strong>Въпрос:</strong> Ако годишната заплата на служител е $52 000 и той работи 40 часа седмично в продължение на 52 седмици в годината, каква е почасовата му заплата?</p>
 </section>
-<section class="slide level2">
+<section class="slide level2 scrollable">
 
 <h4 id="решение-10">Решение</h4>
 <ol type="1">
@@ -726,15 +728,17 @@
 <li class="fragment">Седмици в годината: 52</li>
 </ul></li>
 <li class="fragment"><strong>Формула на съотношението:</strong> <span class="math inline">\(w = \frac{52000}{40 \times 52}\)</span></li>
-<li class="fragment"><strong>Решаваме за <span class="math inline">\(w\)</span>:</strong>
+<li class="fragment"><strong>Решаваме за</strong> <span class="math inline">\(w\)</span>:
 <ul>
 <li class="fragment">Изчислете: <span class="math inline">\(w = \frac{52000}{2080}\)</span></li>
 <li class="fragment">Резултат: <span class="math inline">\(w = 25\)</span></li>
 </ul></li>
 <li class="fragment"><strong>Проверка:</strong> Почасова заплата от $25 за 40 часа седмично за 52 седмици се равнява на годишната заплата от</li>
 </ol>
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section>
     </div>
@@ -763,13 +767,12 @@
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'smaller': false,
+'smaller': true,
  
         // Display controls in the bottom right corner
         controls: false,
@@ -980,18 +983,7 @@
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1023,11 +1015,50 @@
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
-      function tippyHover(el, contentFn) {
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1037,8 +1068,17 @@
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -1052,7 +1092,11 @@
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {
